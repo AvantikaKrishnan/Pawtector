@@ -1,13 +1,7 @@
-import 'package:epics5/Set_Profile.dart';
-import 'package:epics5/homepage.dart';
 import 'package:epics5/login.dart';
 import 'package:epics5/signup.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
-import 'community.dart';
-import 'my_profile.dart';
 
 
 
@@ -88,27 +82,23 @@ class _EpicsState extends State<Epics> {
       const SizedBox(
         height: 20,
       ),
-
-
     ],
-
-
     ),
-          MaterialButton(
+      MaterialButton(
             minWidth: double.infinity,
             height:60,
             onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()));
 
             },
             color: Colors.indigoAccent[400],
             shape: RoundedRectangleBorder(
-                side: BorderSide(
+                side: const BorderSide(
                   color: Colors.black,
                 ),
                 borderRadius: BorderRadius.circular(40)
             ),
-            child: Text("Login",style: TextStyle(
+            child: const Text("Login",style: TextStyle(
                 fontWeight: FontWeight.w600,fontSize: 16,color: Colors.white70
 
             ),
@@ -121,20 +111,19 @@ class _EpicsState extends State<Epics> {
         minWidth: double.infinity,
         height:60,
         onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => SignupPage()));
-
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const SignupPage()));
         },
         color: Colors.redAccent,
         shape: RoundedRectangleBorder(
-            side: BorderSide(
+            side: const BorderSide(
               color: Colors.black,
             ),
             borderRadius: BorderRadius.circular(40)
         ),
-        child: Text("Sign up",style: TextStyle(
+        child: const Text("Sign up",style: TextStyle(
           fontWeight: FontWeight.w600,fontSize: 16,
-
-        ),),
+        ),
+        ),
       ),
     ],
     ),
@@ -142,8 +131,5 @@ class _EpicsState extends State<Epics> {
     ),
     )
     );
-
-
-
   }
 }

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:epics5/community_page.dart';
 import 'package:epics5/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'main.dart';
 import 'my_posts.dart';
 import 'my_profile.dart';
 
+late final String uID;
 
 class HomePage extends StatefulWidget {
   @override
@@ -20,12 +22,23 @@ class HomePage extends StatefulWidget {
 List<String> docIds = [];
 
 class _HomePageState extends State<HomePage> {
-  final FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseAuth auth = FirebaseAuth.instance;
+
+  getUID() {
+    uID = auth.currentUser!.uid;
+  }
+
   //signout function
   signOut() async {
     await auth.signOut();
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => Epics()));
+  }
+
+  @override
+  void initState() {
+    getUID();
+    super.initState();
   }
 
 
@@ -150,6 +163,12 @@ class _HomePageState extends State<HomePage> {
                 // ...
                 // Then close the drawer
 
+              },
+            ),
+            ListTile(
+              title: const Text('Community Page'),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const CommunityPage()));
               },
             ),
             ListTile(
