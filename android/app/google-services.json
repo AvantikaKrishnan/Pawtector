@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "488064426189",
+    "project_id": "epics-2c361",
+    "storage_bucket": "epics-2c361.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488064426189:android:cefda0f98a9155ddb08984",
+        "android_client_info": {
+          "package_name": "com.example.epics5"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488064426189-bp3u2gir62h0vpi9kkcv2loob26q67vd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEOv33zQITe9GPpFTnzmfwUBLmhm9T3dI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488064426189-bp3u2gir62h0vpi9kkcv2loob26q67vd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
