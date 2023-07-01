@@ -39,9 +39,9 @@ class _LoginPageState extends State<LoginPage> {
         leading:
         IconButton( onPressed: (){
           Navigator.pop(context);
-        },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
+        },icon:const Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
       ),
-      body: Container(
+      body: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: double.infinity,
         child: Column(
@@ -51,21 +51,22 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 Column(
                   children: [
-                    Text ("Login", style: TextStyle(
+                    const Text ("Login", style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),),
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
                     Text("Welcome back ! Login with your credentials",style: TextStyle(
                       fontSize: 15,
                       color: Colors.grey[700],
                     ),),
-                    SizedBox(height: 30,)
+                    const SizedBox(height: 30,)
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                       horizontal: 40
+
                   ),
                   child: Column(
                     children: [
@@ -76,11 +77,12 @@ class _LoginPageState extends State<LoginPage> {
                       ),),
                       const SizedBox(height: 5,),
                       TextField(
+                        controller: name,
                         obscureText: false,
                         onChanged: (value){
                           username = value;
-                           print(username);
                         },
+
                         decoration: const InputDecoration(
                           contentPadding: EdgeInsets.symmetric(vertical: 0,horizontal: 10),
                           enabledBorder: OutlineInputBorder(
@@ -102,10 +104,10 @@ class _LoginPageState extends State<LoginPage> {
                       ),),
                       const SizedBox(height: 5,),
                       TextField(
+                        controller: pass,
                         obscureText: true,
                         onChanged: (value){
                           password = value;
-                          print(password);
                         },
                         decoration: const InputDecoration(
                           contentPadding: EdgeInsets.symmetric(vertical: 0,horizontal: 10),
@@ -141,8 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                       height:60,
                       onPressed: () async {
                         setState(() {
-                          //username = name.text.trim();
-                          //password = pass.text.trim();
+
                         });
                         try {
                           final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -157,6 +158,8 @@ class _LoginPageState extends State<LoginPage> {
                               );
                             }
                           else if (credential != null) {
+                            name.clear();
+                            pass.clear();
                             Navigator.push(context, MaterialPageRoute(
                                 builder: (context) => HomePage()),
                             );
@@ -183,17 +186,16 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Dont have an account?"),
+                    const Text("Dont have an account?"),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => SignupPage()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const SignupPage()));
                       },
-                    child:Text("Sign Up",style: TextStyle(
-
+                    child:const Text("Sign Up",style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 18
                     ),
@@ -237,16 +239,16 @@ class MakeInput extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label,style:TextStyle(
+        Text(label,style:const TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.w400,
             color: Colors.black87
         ),),
-        SizedBox(height: 5,),
+        const SizedBox(height: 5,),
         TextField(
           controller: controller,
           obscureText: obsure,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             contentPadding: EdgeInsets.symmetric(vertical: 0,horizontal: 10),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
@@ -258,7 +260,7 @@ class MakeInput extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 30,)
+        const SizedBox(height: 30,)
 
       ],
     );

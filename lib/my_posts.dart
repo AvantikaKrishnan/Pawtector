@@ -1,13 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:epics5/DisplayEverything.dart';
-import 'package:epics5/Get_information.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'display_my_posts.dart';
-import 'information.dart';
+
 
 
 String name = '';
@@ -161,61 +158,70 @@ class _My_postsState extends State< My_posts> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: CupertinoSearchTextField(
-            controller: myController,
-          )
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/my_posts.png'),
+          fit: BoxFit.cover,
+        )
       ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+            backgroundColor: Colors.white70,
+            title: CupertinoSearchTextField(
+              controller: myController,
+            )
+        ),
 
-      body:
-      ListView.separated(
+        body:
+        ListView.separated(
 
 
-        itemCount: resultList.length,
-        itemBuilder: (context,index) {
-          return ListTile(
+          itemCount: resultList.length,
+          itemBuilder: (context,index) {
+            return ListTile(
 
-            shape: RoundedRectangleBorder(borderRadius:  BorderRadius.only(topRight: Radius.circular(32), bottomRight: Radius.circular(32),topLeft: Radius.circular(32),bottomLeft:  Radius.circular(32))),
-            visualDensity: VisualDensity(horizontal: 0, vertical: 4),
-              contentPadding: EdgeInsets.only(left: 15, top: 20,right :5),
+              shape: const RoundedRectangleBorder(borderRadius:  BorderRadius.only(topRight: Radius.circular(32), bottomRight: Radius.circular(32),topLeft: Radius.circular(32),bottomLeft:  Radius.circular(32))),
+              visualDensity: const VisualDensity(horizontal: 0, vertical: 4),
+                contentPadding: const EdgeInsets.only(left: 15, top: 20,right :5),
 
-            tileColor: Color(0xFFCAF0F8),
-            onTap: (){
-              TypeOfAnimal_post =resultList[index]['Type of animal'];
-              Count_post =resultList[index]['Country'];
-              cit_post =resultList[index]['city'];
-              Stat_post =resultList[index]['State'];
-              addr_post =resultList[index]['Nearest address'];
-              land_post = resultList[index]['Nearest landmark'];
-              locality_post =resultList[index]['Seen in locality'];
-              features_post =resultList[index]['Distinguishing features'];
-              injury_post = resultList[index]['Is the animal injured'];
-              vet_post =resultList[index]['Contact with vet'];
-              img_post = resultList[index]['Image'];
-              id_post = resultList[index]['id'];
+              tileColor: Colors.white38,
+              onTap: (){
+                TypeOfAnimal_post =resultList[index]['Type of animal'];
+                Count_post =resultList[index]['Country'];
+                cit_post =resultList[index]['city'];
+                Stat_post =resultList[index]['State'];
+                addr_post =resultList[index]['Nearest address'];
+                land_post = resultList[index]['Nearest landmark'];
+                locality_post =resultList[index]['Seen in locality'];
+                features_post =resultList[index]['Distinguishing features'];
+                injury_post = resultList[index]['Is the animal injured'];
+                vet_post =resultList[index]['Contact with vet'];
+                img_post = resultList[index]['Image'];
+                id_post = resultList[index]['id'];
 
-              Navigator.push(context, MaterialPageRoute(builder: (context) => display_my_posts()));
-            },
-            title: Text(resultList[index]['Type of animal']),
-            subtitle: Text(resultList[index]['Country']),
-           trailing:Icon(Icons.arrow_circle_right)
+                Navigator.push(context, MaterialPageRoute(builder: (context) => display_my_posts()));
+              },
+              title: Text(resultList[index]['Type of animal']),
+              subtitle: Text(resultList[index]['Country']),
+             trailing:const Icon(Icons.arrow_circle_right)
 //ht — material icon named "arrow circle right" (outlined).
 // IconData(0xf05bd, fontFamily: 'MaterialIcons')
-          );
+            );
 
 
-        }, separatorBuilder: (BuildContext context, int index) => SizedBox (height:10,),
-
-
-
+          }, separatorBuilder: (BuildContext context, int index) => const SizedBox (height:10,),
 
 
 
+
+
+
+
+        ),
 
       ),
-
     );
 
 

@@ -1,15 +1,9 @@
 import 'dart:async';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:epics5/Select_profile.dart';
 import 'package:epics5/main.dart';
-
 import 'Set_Profile.dart';
 import 'firebase_constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import 'homepage.dart';
-
 
 class EmailVerificationScreen extends StatefulWidget {
 
@@ -48,14 +42,14 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     if (isEmailVerified) {
       // TODO: implement your code after email verification
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Email Successfully Verified")));
+          .showSnackBar(const SnackBar(content: Text("Email Successfully Verified")));
 
       timer?.cancel();
 
 
         Navigator.pop(context);
         Navigator.push(
-            context, MaterialPageRoute(builder: (ctx) => set_profile()));
+            context, MaterialPageRoute(builder: (ctx) => const set_profile()));
     }
 
 
@@ -86,7 +80,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
             timer?.cancel()
          },
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Epics()))
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const Epics()))
     }),),
         body: SingleChildScrollView(
           child: Column(

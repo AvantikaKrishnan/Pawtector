@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:epics5/DisplayEverything.dart';
-import 'package:epics5/Get_information.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import 'information.dart';
 
-
+bool showSpin = false;
 String name = '';
 late String TypeOfAnimal  ='';
 late String Count ='';
@@ -20,6 +20,7 @@ late String features ='';
 late String injury ='';
 late String vet ='';
 late String img = '';
+late String uid = '';
 
 
  Future<void> main() async {
@@ -99,12 +100,6 @@ class _displayinfoState extends State<displayinfo> {
     searchResultList();
   }
 
-  display2(){
-    var showResults = [] ;
-    
-
-  }
-
   searchResultList(){
     var showResults = [] ;
     if(myController.text != "")
@@ -120,25 +115,20 @@ class _displayinfoState extends State<displayinfo> {
                 showResults.add(InfoSnapshot);
 
               }
-            if(country.contains(myController.text.toLowerCase()))
+            else if(country.contains(myController.text.toLowerCase()))
             {
               showResults.add(InfoSnapshot);
 
 
             }
-            if(city.contains(myController.text.toLowerCase()))
+            else if(city.contains(myController.text.toLowerCase()))
             {
               showResults.add(InfoSnapshot);
-
-
             }
-            if(state.contains(myController.text.toLowerCase()))
+            else if(state.contains(myController.text.toLowerCase()))
             {
               showResults.add(InfoSnapshot);
-
-
             }
-
           }
       }
     else
@@ -149,57 +139,76 @@ class _displayinfoState extends State<displayinfo> {
       resultList = showResults;
     });
   }
+  Future<String> _loadData() async {
+    // Specifies the indicator's duration / delay
+    await Future.delayed(const Duration(seconds: 3));
+    return Future<String>.value('Loaded');
+  }
 
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-          title: CupertinoSearchTextField(
-            controller: myController,
-          )
-      ),
-      body: ListView.separated(
-              itemCount: resultList.length,
-              itemBuilder: (context,index) {
-                return ListTile(
-                  shape: RoundedRectangleBorder(borderRadius:  BorderRadius.only(topRight: Radius.circular(22), bottomRight: Radius.circular(22),topLeft: Radius.circular(22),bottomLeft:  Radius.circular(22))),
-                  tileColor: Color(0xFFCAF0F8),
+    return ModalProgressHUD(
 
-                  onTap: (){
-                    TypeOfAnimal =resultList[index]['Type of animal'];
-                    Count =resultList[index]['Country'];
-                    cit =resultList[index]['city'];
-                    Stat =resultList[index]['State'];
-                    addr =resultList[index]['Nearest address'];
-                    land = resultList[index]['Nearest landmark'];
-                    locality =resultList[index]['Seen in locality'];
-                    features =resultList[index]['Distinguishing features'];
-                    injury = resultList[index]['Is the animal injured'];
-                    vet =resultList[index]['Contact with vet'];
-                    img = resultList[index]['Image'];
-
-                    print(img);
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => displayEverything()));
-                  },
-                  title: Text(resultList[index]['Type of animal']),
-                  subtitle: Text(resultList[index]['Country']),
-                  trailing: Text(resultList[index]['city']),
-
-                );
-
-
-              }, separatorBuilder: (BuildContext context, int index) => SizedBox(height: 10,),
-
-
-
-
-
-
-
+      inAsyncCall: showSpin,
+      child: Container(
+          decoration: const BoxDecoration(
+          image: DecorationImage(
+          image: NetworkImage('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148907306.jpg'),fit: BoxFit.cover
       ),
 
+              ),
+
+      child:Scaffold(
+      backgroundColor : Colors.transparent,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+            title: CupertinoSearchTextField(
+              controller: myController,
+            )
+        ),
+
+        body:
+        ListView.separated(
+                itemCount: resultList.length,
+                itemBuilder: (context,index) {
+                  return ListTile(
+                    shape: const RoundedRectangleBorder(borderRadius:  BorderRadius.only(topRight: Radius.circular(22), bottomRight: Radius.circular(22),topLeft: Radius.circular(22),bottomLeft:  Radius.circular(22))),
+                    tileColor: Colors.white60,
+
+                    onTap: (){
+                      TypeOfAnimal =resultList[index]['Type of animal'];
+                      Count =resultList[index]['Country'];
+                      cit =resultList[index]['city'];
+                      Stat =resultList[index]['State'];
+                      addr =resultList[index]['Nearest address'];
+                      land = resultList[index]['Nearest landmark'];
+                      locality =resultList[index]['Seen in locality'];
+                      features =resultList[index]['Distinguishing features'];
+                      injury = resultList[index]['Is the animal injured'];
+                      vet =resultList[index]['Contact with vet'];
+                      img = resultList[index]['Image'];
+                      uid =  resultList[index]['uid'];
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => displayEverything()));
+                    },
+                    title: Text(resultList[index]['Type of animal']),
+                    subtitle: Text(resultList[index]['Country']),
+                    trailing: Text(resultList[index]['city']),
+
+                  );
+
+
+                }, separatorBuilder: (BuildContext context, int index) => const SizedBox(height: 10,),
+
+
+
+
+
+
+
+        ),
+      )
+      ),
     );
 
 

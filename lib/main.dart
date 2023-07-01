@@ -1,21 +1,38 @@
 import 'package:epics5/login.dart';
 import 'package:epics5/signup.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
 
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
 
-  runApp(MaterialApp(
+  Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+    // If you're going to use other Firebase services in the background, such as Firestore,
+    // make sure you call `initializeApp` before using other Firebase services.
+    await Firebase.initializeApp();
+
+    print("Handling a background message: ${message.messageId}");
+  }
+
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
     home: Epics(),
-
-  ));
+  ),);
 }
 
 class Epics extends StatefulWidget {
@@ -42,7 +59,7 @@ class _EpicsState extends State<Epics> {
 
         width: double.infinity,
        // height: MediaQuery.of(context).size.height,
-    padding: EdgeInsets.symmetric(horizontal: 30,vertical: 30),
+    padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 30),
     constraints: null,
 
 
@@ -56,12 +73,12 @@ class _EpicsState extends State<Epics> {
         height: 30,
       ),
 
-      Text(
+      const Text(
     "Welcome Pawtector!",
         textAlign: TextAlign.center,
     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
     ),
-    SizedBox(height: 30,),
+    const SizedBox(height: 30,),
     Text("The superheroes to your furry friends. Join us in our quest to save the animals around us and become a Pawtector.",
     textAlign: TextAlign.center,
     style: TextStyle(

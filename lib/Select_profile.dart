@@ -5,7 +5,6 @@ import 'package:epics5/Set_Profile.dart';
 import 'package:epics5/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
 import 'package:image_picker/image_picker.dart';
@@ -109,15 +108,11 @@ class _select_profileState extends State<select_profile> {
                            setState(() {
                              showSpinner = false;
                            });
-
-                           print(imageUrl);
-
-                           }, icon:  Icon(Icons.camera_alt)),
-    ),
+                           }, icon:  const Icon(Icons.camera_alt)),
+                      ),
                       const SizedBox(
                         height: 50,
                       ),
-
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 40),
                         child: Container(
@@ -141,15 +136,17 @@ class _select_profileState extends State<select_profile> {
                               await profile.doc(uid).set({
                                 'name': name,
                                 'email' : email,
-                                'mobilenumber ': Mobilenumber,
                                  'profession' : Profession,
                                  'image': imageUrl,
+                                'uid' : uid,
+                                'about' : about,
+                                'status' : 'Offline',
 
                               }).then((value) => Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage())));
                               Navigator.pop(context);
 
                             },
-                            color: Color(0xFFFFCFD2),
+                            color: const Color(0xFFFFCFD2),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(40)
                             ),

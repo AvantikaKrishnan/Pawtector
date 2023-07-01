@@ -15,7 +15,7 @@ class _LocState extends State<Loc> {
   signOut() async {
     await auth.signOut();
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => SignupPage()));
+        context, MaterialPageRoute(builder: (context) => const SignupPage()));
   }
 
   @override
@@ -24,11 +24,8 @@ class _LocState extends State<Loc> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.green,
-        title: Text("EPICS"),
+        title: const Text("EPICS"),
       ),
-
-      //  floating Action Button using for signout ,
-
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Stack(
           fit: StackFit.expand,
@@ -39,15 +36,15 @@ class _LocState extends State<Loc> {
               child: FloatingActionButton(
                 heroTag: 'back',
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Information()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const Information()));
 
                 },
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 child: const Icon(
                   Icons.arrow_left,
                   size: 40,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
             ),
@@ -57,12 +54,12 @@ class _LocState extends State<Loc> {
               child: FloatingActionButton(
                 heroTag: 'next',
                 onPressed: () {},
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 child: const Icon(
                   Icons.arrow_right,
                   size: 40,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
             ),
@@ -70,7 +67,7 @@ class _LocState extends State<Loc> {
       ),
 
 
-      body: Center(
+      body: const Center(
         child: Text("Home page"),
       ),
     );

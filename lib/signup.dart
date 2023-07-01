@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:epics5/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:email_auth/email_auth.dart';
 import 'email_verification_page.dart';
@@ -30,7 +29,7 @@ class _SignupPageState extends State<SignupPage> {
 
 
 
-  EmailAuth emailAuth = new EmailAuth(sessionName: 'Test');
+  EmailAuth emailAuth = EmailAuth(sessionName: 'Test');
 
   Map<String, String>? get remoteServerConfiguration => null;
   @override
@@ -141,7 +140,6 @@ class _SignupPageState extends State<SignupPage> {
                             obscureText: false,
                             onChanged: (value){
                               username = value;
-                              print(_emailcontroller);
                               // print(username);
                             },
                             decoration: const InputDecoration(
@@ -257,16 +255,16 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Already have an account? "),
+                        const Text("Already have an account? "),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()));
                           },
-                          child: Text("Login", style: TextStyle(
+                          child: const Text("Login", style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 18
                         ),

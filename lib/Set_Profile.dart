@@ -1,7 +1,6 @@
 import 'package:epics5/Select_profile.dart';
 import 'package:flutter/material.dart';
 import 'firebase_constants.dart';
-import 'package:flutter/services.dart';
 
 class set_profile extends StatefulWidget {
   const set_profile({Key? key}) : super(key: key);
@@ -12,10 +11,10 @@ class set_profile extends StatefulWidget {
 late String  name = '';
 late String  Mobilenumber= '';
 late String  Profession = '';
-
+late String  about = '';
 class _set_profileState extends State<set_profile> {
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> Keyprofile = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,7 @@ class _set_profileState extends State<set_profile> {
         ),
         body: SingleChildScrollView(
             child: Form(
-                key: _formKey,
+                key: Keyprofile,
         child: SizedBox(
         height: MediaQuery.of(context).size.height,
             width: double.infinity,
@@ -102,7 +101,7 @@ class _set_profileState extends State<set_profile> {
                                   Container(
                                     width: 300,
                                     height: 50,
-                                    padding: EdgeInsets.all(10),
+                                    padding: const EdgeInsets.all(10),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                         border: Border.all(color: Colors.blueAccent)
@@ -110,63 +109,8 @@ class _set_profileState extends State<set_profile> {
                                       ),
                                     child: Text('${auth.currentUser?.email}', textAlign: TextAlign.center,),
                                     ),
-                                  const SizedBox(height: 40,),
-                                ]
-                            )
-                        ),
-                        Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 40
-                            ),
-                            child: Column(
+                                  const SizedBox(height: 30,),
 
-                                children: [
-                                  const Text('Mobile number',style:TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black87
-                                  ),),
-                                  const SizedBox(height: 5,),
-                                  TextFormField(
-                                    inputFormatters: <TextInputFormatter>[
-                                      FilteringTextInputFormatter.digitsOnly],
-                                    obscureText: false,
-                                    onChanged: (value){
-                                      Mobilenumber = value;
-
-
-                                    },
-                                    decoration: const InputDecoration(
-                                      contentPadding: EdgeInsets.symmetric(vertical: 0,horizontal: 30),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.blue,
-                                        ),
-                                      ),
-                                      border: OutlineInputBorder(
-                                          borderSide: BorderSide(color: Colors.blue)
-                                      ),
-                                    ),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please enter some text';
-                                      }
-                                        else if(value.length != 10)
-                                          {
-                                            return 'Mobile Number must be of 10 digit';
-                                          }
-                                      else
-                                      return null;
-                                    },
-                                  ),
-                                  const SizedBox(height: 40,),
-                                  Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 5
-                                      ),
-                                      child: Column(
-
-                                          children: [
                                             const Text('Profession',style:TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w400,
@@ -198,6 +142,54 @@ class _set_profileState extends State<set_profile> {
                                               },
                                             ),
                                   const SizedBox(height: 30,),
+
+
+
+                                            const Text('Write something about yourself',style:TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w400,
+                                                color: Colors.black87
+                                            ),),
+                                            const SizedBox(height: 5,),
+                                            TextFormField(
+
+                                              obscureText: false,
+                                              onChanged: (value){
+                                                about = value;
+
+
+                                              },
+                                              decoration: const InputDecoration(
+                                                contentPadding: EdgeInsets.symmetric(vertical: 0,horizontal: 30),
+                                                enabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Colors.blue,
+                                                  ),
+                                                ),
+                                                border: OutlineInputBorder(
+                                                    borderSide: BorderSide(color: Colors.blue)
+                                                ),
+                                              ),
+                                              validator: (value) {
+                                                if (value == null || value.isEmpty) {
+                                                  return 'Please enter some text';
+                                                }
+
+                                                else
+                                                  return null;
+                                              },
+                                              maxLines: 5,
+                                              minLines: 3,
+                                            ),
+                                  const SizedBox(height: 30,),
+
+                      ]
+                  ),
+
+
+                                                ),
+
+
                                       Padding(
                                         padding: const EdgeInsets.symmetric(horizontal: 40),
                                         child: Container(
@@ -212,11 +204,12 @@ class _set_profileState extends State<set_profile> {
                                               )
                                           ),
 
+
                                           child: MaterialButton(
                                             minWidth: double.infinity,
                                             height: 60,
                                             onPressed: () async {
-                                              if (_formKey.currentState!.validate()) {
+                                              if ( Keyprofile.currentState!.validate()) {
 
                                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Processing Data')),);
                                                 Navigator.pop(context);
@@ -241,27 +234,16 @@ class _set_profileState extends State<set_profile> {
                                          ),
                                    ),
                          ),
-                             SizedBox(height: 20,),
+                             const SizedBox(height: 20,),
+]
+            ),
+              ]
 
-
-    ]
     )
     )
-    ]
-    )
-    )
-    ]
-
-
-        )
-                ]
-        )
-        )
         )
         )
     );
-
-
 
 
 
